@@ -13,13 +13,13 @@
                     colors: {
                         // Fancy Black/Purple Theme (Dark)
                         fancy: {
-                            bg: '#000000', // Pure black for better contrast
-                            card: '#12121a', // Deep dark blue-grey
-                            border: '#272730', // Subtle border
+                            bg: '#000000', // Pure black
+                            card: '#181824', // Lighter dark blue-grey for better separation
+                            border: '#3f3f46', // Much clearer grey border (Zinc 700)
                             text: '#e4e4e7',
                             muted: '#a1a1aa',
-                            accent: '#9333ea', // Keep for reference, used in some focus rings
-                            accentHover: '#7e22ce',
+                            accent: '#7c3aed', // Violet 600
+                            accentHover: '#6d28d9',
                         },
                         // Warm Theme (Light - No Blue)
                         warm: {
@@ -36,9 +36,17 @@
             }
         }
     </script>
-    <style>
+    <style type="text/tailwindcss">
         .progress-bar-transition { transition: width 0.3s ease; }
         [v-cloak] { display: none; }
+
+        /* Button Gradients & Styles */
+         .btn-primary {
+             @apply bg-gradient-to-br from-stone-600 to-stone-800 hover:from-stone-500 hover:to-stone-700 text-white shadow-lg shadow-stone-300/50 transition-all duration-300 border border-stone-500/10;
+         }
+         .dark .btn-primary {
+             @apply bg-gradient-to-r from-[#2e1065] via-[#4c1d95] to-[#2e1065] hover:from-[#4c1d95] hover:to-[#5b21b6] text-purple-100 shadow-none border border-purple-500/30;
+         }
         
         /* Custom scrollbar for fancy dark mode */
         .dark ::-webkit-scrollbar {
@@ -147,7 +155,7 @@
         <div class="bg-warm-card dark:bg-fancy-card p-6 rounded-xl shadow-lg border border-warm-border dark:border-fancy-border transition-colors">
             <div class="flex justify-between items-center mb-4">
                 <h2 class="text-xl font-bold text-warm-text dark:text-fancy-text">Generation Results</h2>
-                <button onclick="checkResults()" id="checkResultsBtn" class="bg-warm-accent hover:bg-warm-accentHover dark:bg-fancy-accent dark:hover:bg-fancy-accentHover text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center shadow-sm transition-all">
+                <button onclick="checkResults()" id="checkResultsBtn" class="btn-primary px-4 py-2 rounded-lg text-sm font-medium flex items-center shadow-sm transition-all">
                     <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
                     Check Results (Refresh)
                 </button>
@@ -189,7 +197,7 @@
                         <label class="block text-xs font-medium text-warm-muted dark:text-fancy-muted mb-1">First Seed</label>
                         <input type="number" class="task-seed mt-1 block w-full rounded-lg border-warm-border dark:border-fancy-border dark:bg-[#13131f] dark:text-white shadow-sm px-3 py-2 border text-sm focus:ring-warm-accent dark:focus:ring-fancy-accent focus:border-warm-accent dark:focus:border-fancy-accent outline-none" placeholder="e.g. 61">
                     </div>
-                    <button onclick="sendTaskBatch(this)" class="send-btn mt-auto w-full bg-warm-accent hover:bg-warm-accentHover dark:bg-fancy-accent dark:hover:bg-fancy-accentHover text-white px-3 py-2 rounded-lg text-sm font-medium flex justify-center items-center shadow-md transition-all">
+                    <button onclick="sendTaskBatch(this)" class="send-btn mt-auto w-full btn-primary text-white px-3 py-2 rounded-lg text-sm font-medium flex justify-center items-center shadow-md transition-all">
                         Send Request (Batch 5)
                     </button>
                 </div>
